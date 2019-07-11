@@ -2,27 +2,41 @@
 
 This is a sample boilerplate for [sam](https://github.com/awslabs/serverless-application-model)
 
-File organization:
+
+## Getting Started
+
+### Requirements
+
+- AWS CLI already configured with Administrator permission
+
+- [NodeJS 10.10+ installed](https://nodejs.org/en/download/releases/)
+
+- [Docker installed](https://www.docker.com/community-edition)
+
+### Organization
+
+File structure `three`:
 
 ```
 .
+├── .dockerignore
 ├── .gitignore
 ├── Dockerfile
-├── README.md
 ├── event.json
 ├── hello-world
 │   └── app.js
 │   └── package.json
 │   └── test
 │       └── test-handler.js
+├── README.md
 ├── template.yaml
 ```
+
+- `.dockerignore` To increase Docker build performance, exclude files and directories. this file is similar to `.gitignore` file, used by  the `Git` tool.
 
 - `.gitignore` File containing untracked files,`Git`.
 
 - `Dockerfile` The application must run in an isolated container for delivery of `CI` and continuous deployment of `CD`.
-
-- `README.md` is the software Project Documentation File. It contains information that is usually required to understand the essence of the project. It is is the easiest way to answer questions that a team may have about how to install and use the application. The most common formatting method is  <[Markdown](https://guides.github.com/features/mastering-markdown/)>
 
 - `event.json` API Gateway Proxy Integration event payload.
 
@@ -30,36 +44,24 @@ File organization:
 
 - `hello-world/app.js` AWS lambda function code.
 
+- `README.md` Is the software Project Documentation File. It contains information that is usually required to understand the essence of the project. It is is the easiest way to answer questions that a team may have about how to install and use the application. The most common formatting method is  [Markdown](https://guides.github.com/features/mastering-markdown/)
+
 - `template.yaml` SAM template.
 
-#### Table of Contents
+## Table of Contents
 
-- [Requirements](#requirements)
 - [Setup process](#setup-process)
-
   - [Local development](#local-development)
-
 - [Packaging and deployment](#packaging-and-deployment)
 - [Fetch, tail, and filter Lambda function logs](#fetch-tail-and-filter-lambda-function-logs)
 - [Testing](#testing)
 - [Cleanup](#cleanup)
 - [Bringing to the next level](#bringing-to-the-next-level)
-
   - [Learn how SAM Build can help you with dependencies](#learn-how-sam-build-can-help-you-with-dependencies)
   - [Create an additional API resource](#create-an-additional-api-resource)
   - [Step-through debugging](#stepthrough-debugging)
-
 - [Building](#building)
-
   - [Building the project](#building-the-project)
-
-### Requirements
-
-* AWS CLI already configured with Administrator permission
-
-* [NodeJS 10.10+ installed](https://nodejs.org/en/download/releases/)
-
-* [Docker installed](https://www.docker.com/community-edition)
 
 ### Setup process
 
