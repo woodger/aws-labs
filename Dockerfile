@@ -1,10 +1,13 @@
-FROM python:3
+FROM python:alpine
 
 WORKDIR /usr/src/app
-
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+RUN apk update && \
+    apk upgrade && \
+    apk add bash && \
+    apk add --no-cache --virtual build-deps build-base gcc && \
+    pip install aws-sam-cli==0.14.0 && \
+    apk del build-deps
+
+ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]

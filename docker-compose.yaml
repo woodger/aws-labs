@@ -1,0 +1,12 @@
+version: '3.6'
+services:
+  sam-app:
+    build: .
+    command: ["$PWD"]
+    expose:
+      - "3001"
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock

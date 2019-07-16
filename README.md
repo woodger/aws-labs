@@ -2,7 +2,6 @@
 
 This is a sample boilerplate for [sam](https://github.com/awslabs/serverless-application-model)
 
-
 ## Getting Started
 
 ### Requirements
@@ -23,12 +22,10 @@ File structure `three`:
 ├── .gitignore
 ├── Dockerfile
 ├── event.json
-├── hello-world
-│   └── app.js
-│   └── package.json
-│   └── test
-│       └── test-handler.js
 ├── README.md
+├── src
+│   └── index.js
+│   └── package.json
 ├── template.yaml
 ```
 
@@ -40,11 +37,9 @@ File structure `three`:
 
 - `event.json` API Gateway Proxy Integration event payload.
 
-- `hello-world` Source code for a lambda function.
-
-- `hello-world/app.js` AWS lambda function code.
-
 - `README.md` Is the software Project Documentation File. It contains information that is usually required to understand the essence of the project. It is is the easiest way to answer questions that a team may have about how to install and use the application. The most common formatting method is  [Markdown](https://guides.github.com/features/mastering-markdown/)
+
+- `src` AWS lambda function code.
 
 - `template.yaml` SAM template.
 
@@ -94,9 +89,6 @@ Events:
       Path: /hello
       Method: get
 ```
-
-
-![Uml](http://yuml.me/woodger/diagram/scruffy/class/%2F%2F Cool Class Diagram, [Customer|-forname:string;surname:string|doShiz()]<>-orders*>[Order],[Order]++-0..*>[LineItem],[Order]-[note:Aggregate root{bg:wheat}].svg)
 
 More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
 
