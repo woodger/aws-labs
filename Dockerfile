@@ -1,13 +1,7 @@
-FROM python:alpine
+FROM python:3
 
 WORKDIR /usr/src/app
-COPY . .
 
-RUN apk update && \
-    apk upgrade && \
-    apk add bash && \
-    apk add --no-cache --virtual build-deps build-base gcc && \
-    pip install aws-sam-cli==0.14.0 && \
-    apk del build-deps
+RUN python3 -m pip install --user --no-warn-script-location aws-sam-cli
 
 ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]

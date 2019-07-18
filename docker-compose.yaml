@@ -4,9 +4,9 @@ services:
     build: .
     command: ["$PWD"]
     expose:
-      - "3001"
+      - 3000
     ports:
-      - "3001:3001"
+      - "3000:3000"
     volumes:
       - .:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock

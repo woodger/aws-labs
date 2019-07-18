@@ -20,10 +20,12 @@ File structure `three`:
 .
 ├── .dockerignore
 ├── .gitignore
+├── docker-compose.yaml
 ├── Dockerfile
+├── entrypoint.sh
 ├── event.json
 ├── README.md
-├── src
+├── app
 │   └── index.js
 │   └── package.json
 ├── template.yaml
@@ -33,7 +35,17 @@ File structure `three`:
 
 - `.gitignore` File containing untracked files,`Git`.
 
+- `docker-compose.yaml` Entrypoint applications for local development.
+
+Run in terminal for start `api`:
+
+```bash
+docker-compose up
+```
+
 - `Dockerfile` The application must run in an isolated container for delivery of `CI` and continuous deployment of `CD`.
+
+- `entrypoint.sh` Since the `ENTRYPOINT` is a bit complex, encapsulated it in it’s own shell script.
 
 - `event.json` API Gateway Proxy Integration event payload.
 
@@ -65,7 +77,7 @@ File structure `three`:
 **Invoking function locally using a local sample payload**
 
 ```bash
-sam local invoke HelloWorldFunction --event event.json
+sam local invoke SampleFunction --event event.json
 ```
 
 **Invoking function locally through local API Gateway**
@@ -83,10 +95,10 @@ If the previous command ran successfully you should now be able to hit the follo
 ```yaml
 ...
 Events:
-  HelloWorld:
+  ThumbnailApi:
     Type: Api
     Properties:
-      Path: /hello
+      Path: /{value}
       Method: get
 ```
 
@@ -100,10 +112,10 @@ AWS Lambda NodeJS runtime requires a flat folder with all dependencies including
 
 ```yaml
 ...
-    HelloWorldFunction:
+    SampleFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: hello-world/
+            CodeUri: ./app
             ...
 ```
 
@@ -137,7 +149,6 @@ After deployment is complete you can run the following command to retrieve the A
 ```bash
 aws cloudformation describe-stacks \
     --stack-name sam-app \
-    --query 'Stacks[].Outputs[?OutputKey==`HelloWorldApi`]' \
     --output table
 ```
 
@@ -148,7 +159,7 @@ To simplify troubleshooting, SAM CLI has a command called sam logs. sam logs let
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-sam logs -n HelloWorldFunction --stack-name sam-app --tail
+sam logs -n SampleFunction --stack-name sam-app --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -158,7 +169,7 @@ You can find more information and examples about filtering Lambda function logs 
 We use [mocha](https://mochajs.org/) for testing our code and it is already added in `package.json` under `scripts`, so that we can simply run the following command to run our tests:
 
 ```bash
-cd hello-world
+cd app
 npm install
 npm run test
 ```
@@ -179,7 +190,7 @@ Here are a few things you can try to get more acquainted with building serverles
 
 * Uncomment lines on `app.js`
 * Build the project with ``sam build --use-container``
-* Invoke with ``sam local invoke HelloWorldFunction --event event.json``
+* Invoke with ``sam local invoke SampleFunction --event event.json``
 * Update tests
 
 #### Create an additional API resource
@@ -190,8 +201,6 @@ Here are a few things you can try to get more acquainted with building serverles
 #### Step-through debugging
 
 * **[Enable step-through debugging docs for supported runtimes]((https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging.html))**
-
-Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
 
 ### Building
 

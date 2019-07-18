@@ -1,10 +1,7 @@
 # Node modules
-src/node_modules
-src/package-lock.json
+app/node_modules
+app/package-lock.json
 
 # Environment variables
-src/.env.!example
-src/.env
-
-# The development file
-.aws-sam
+app/.env.!example
+app/.env
